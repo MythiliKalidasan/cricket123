@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnDownload"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/btnDownload"
+        android:enabled="false"
+        android:onClick="buttonClickHandler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DOWNLOAD TABLE"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="CONTACT NO."
+        android:id="@+id/textView"
+        android:layout_below="@+id/btnDownload"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="NAME"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/btnDownload"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_marginStart="115dp" />
+
+</RelativeLayout>

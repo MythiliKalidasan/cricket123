@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Cricket</string>
+    <string name="action_settings">Settings</string>
+
+    //@main1.xml
+    <string name="NEWPLAYER">NEW PLAYER</string>
+    <string name="VIEWPLAYER">VIEW PLAYER</string>
+
+    //NewPalyer
+    <string name="ContactNo">ContactNo</string>
+    <string name="Name">Name</string>
+    <string name="DOB">DOB</string>
+    <string name="SUBMIT">SUBMIT</string>
+
+    //Playerlist
+    <string name="btnDownload">DOWNLOAD TABLE</string>
+    <string name="no">number xcel</string>
+    <string name="name">name xcel</string>
+</resources>
