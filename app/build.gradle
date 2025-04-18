@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
 
 android {
     compileSdkVersion 23
@@ -40,4 +42,27 @@ dependencies {
     compile files('library/httpcore-4.0.1.jar')
     compile files('library/gdata-spreadsheet-3.0.jar')
     compile files('library/gdata-core-1.0.jar')
+}
+
+checkstyle {
+    toolVersion = '8.18' // Use a reasonably modern version compatible with Java 7/Gradle 1.3
+    configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+    sourceSets = [sourceSets.main]
+}
+
+pmd {
+    toolVersion = '5.5.1' // Choose a version compatible with Java 7 and Gradle 1.3
+    ruleSetFiles = files("${project.rootDir}/config/pmd/ruleset.xml")
+    sourceSets = [sourceSets.main]
+    ignoreFailures = true // Start with ignoreFailures=true to avoid breaking build initially
+    consoleOutput = true
+    reports {
+        xml.enabled = false // Disable XML report for now
+        html.enabled = true // Enable HTML report for easier viewing
+    }
+}
+
+// Make the check task depend on checkstyle and pmd
+project(':app').tasks.getByName('check') {
+    dependsOn 'checkstyle', 'pmd'
 }

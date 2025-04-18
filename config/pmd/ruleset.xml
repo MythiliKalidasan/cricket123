@@ -1,0 +1,315 @@
+<?xml version="1.0"?>
+<ruleset name="Custom PMD ruleset for Android Java 7"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+
+    <description>
+        Custom PMD ruleset including recommended Java rules suitable for Java 7 and Android.
+        Based on PMD 5.5.1 rulesets.
+    </description>
+
+    <!-- ================================================================= -->
+    <!-- Basic Rules                                                       -->
+    <!-- ================================================================= -->
+    <rule ref="rulesets/java/basic.xml">
+        <!-- EmptyCatchBlock: Default is fine, catches empty blocks -->
+        <!-- EmptyIfStmt: Default is fine -->
+        <!-- EmptyWhileStmt: Default is fine -->
+        <!-- EmptyTryBlock: Default is fine -->
+        <!-- EmptyFinallyBlock: Default is fine -->
+        <!-- EmptySwitchStatements: Default is fine -->
+        <!-- JumbledIncrementer: Default is fine -->
+        <!-- ForLoopShouldBeWhileLoop: Maybe too opinionated, exclude -->
+        <exclude name="ForLoopShouldBeWhileLoop"/>
+        <!-- UnnecessaryConversionTemporary: Default is fine -->
+        <!-- OverrideBothEqualsAndHashcode: Default is fine (Covered by Checkstyle too) -->
+        <!-- DoubleCheckedLocking: Default is fine -->
+        <!-- ReturnFromFinallyBlock: Default is fine -->
+        <!-- EmptySynchronizedBlock: Default is fine -->
+        <!-- UnnecessaryReturn: Default is fine -->
+        <!-- EmptyStaticInitializer: Default is fine -->
+        <!-- UnconditionalIfStatement: Default is fine -->
+        <!-- EmptyStatementNotInLoop: Default is fine -->
+        <!-- BooleanInstantiation: Default is fine (Covered by Checkstyle too) -->
+        <!-- UnnecessaryParentheses: Default is fine -->
+        <!-- UselessOverridingMethod: Default is fine -->
+        <!-- ClassCastExceptionWithToArray: Default is fine -->
+        <!-- AvoidDecimalLiteralsInBigDecimalConstructor: Default is fine -->
+        <!-- UselessOperationOnImmutable: Default is fine -->
+        <!-- MisplacedNullCheck: Default is fine -->
+        <!-- AvoidThreadGroup: Default is fine -->
+        <!-- BrokenNullCheck: Default is fine -->
+        <!-- BigIntegerInstantiation: Default is fine -->
+        <!-- AvoidUsingOctalValues: Default is fine -->
+        <!-- AvoidUsingShortType: Default is fine -->
+        <!-- AvoidUsingVolatile: Default is fine -->
+        <!-- CollapsibleIfStatements: Default is fine -->
+        <!-- DontUseFloatTypeForLoopIndices: Default is fine -->
+    </rule>
+
+    <!-- ================================================================= -->
+    <!-- Brace Rules                                                       -->
+    <!-- ================================================================= -->
+    <rule ref="rulesets/java/braces.xml"/>
+        <!-- ForLoopsMustUseBraces: Default is fine -->
+        <!-- IfElseStmtsMustUseBraces: Default is fine -->
+        <!-- IfStmtsMustUseBraces: Default is fine -->
+        <!-- WhileLoopsMustUseBraces: Default is fine -->
+
+    <!-- ================================================================= -->
+    <!-- Clone Implementation Rules                                        -->
+    <!-- ================================================================= -->
+    <rule ref="rulesets/java/clone.xml"/>
+        <!-- ProperCloneImplementation: Default is fine -->
+        <!-- CloneThrowsCloneNotSupportedException: Default is fine -->
+        <!-- CloneMethodMustImplementCloneable: Default is fine -->
+
+    <!-- ================================================================= -->
+    <!-- Code Size Rules                                                   -->
+    <!-- ================================================================= -->
+    <!-- Exclude the whole category first, then add back rules with modified properties -->
+    <rule ref="rulesets/java/codesize.xml">
+        <exclude name="CyclomaticComplexity"/>
+        <exclude name="NPathComplexity"/>
+        <exclude name="ExcessiveMethodLength"/>
+        <exclude name="ExcessiveParameterList"/>
+        <exclude name="ExcessiveClassLength"/>
+        <exclude name="TooManyFields"/>
+        <!-- ExcessivePublicCount: May not be suitable for Android Activities/Fragments -->
+        <exclude name="ExcessivePublicCount"/>
+        <!-- TooManyMethods: Can be high in Android components -->
+        <exclude name="TooManyMethods"/>
+        <!-- NcssMethodCount: Use ExcessiveMethodLength instead -->
+        <exclude name="NcssMethodCount"/>
+        <!-- NcssTypeCount: Use ExcessiveClassLength instead -->
+        <exclude name="NcssTypeCount"/>
+        <!-- NcssConstructorCount: Default is fine -->
+    </rule>
+    <!-- Re-add rules with relaxed thresholds -->
+    <rule ref="rulesets/java/codesize.xml/CyclomaticComplexity">
+        <properties>
+            <property name="methodReportLevel" value="15"/> <!-- Default 10 -->
+            <property name="classReportLevel" value="100"/> <!-- Default 80 -->
+        </properties>
+    </rule>
+     <rule ref="rulesets/java/codesize.xml/NPathComplexity">
+        <properties>
+            <property name="reportLevel" value="300"/> <!-- Default 200 -->
+        </properties>
+     </rule>
+     <rule ref="rulesets/java/codesize.xml/ExcessiveMethodLength">
+         <properties>
+             <property name="minimum" value="150"/> <!-- Default 100 -->
+         </properties>
+     </rule>
+     <rule ref="rulesets/java/codesize.xml/ExcessiveParameterList">
+         <properties>
+             <property name="minimum" value="15"/> <!-- Default 10 -->
+         </properties>
+     </rule>
+    <rule ref="rulesets/java/codesize.xml/ExcessiveClassLength">
+        <properties>
+            <property name="minimum" value="1500"/> <!-- Default 1000 -->
+        </properties>
+    </rule>
+     <rule ref="rulesets/java/codesize.xml/TooManyFields">
+        <properties>
+            <property name="maxfields" value="25"/> <!-- Default 15 -->
+        </properties>
+    </rule>
+
+    <!-- ================================================================= -->
+    <!-- Design Rules                                                      -->
+    <!-- ================================================================= -->
+    <rule ref="rulesets/java/design.xml">
+         <!-- UseUtilityClass: Default is fine -->
+         <!-- SimplifyBooleanReturns: Default is fine (Covered by Checkstyle too) -->
+         <!-- SimplifyBooleanExpressions: Default is fine (Covered by Checkstyle too) -->
+         <!-- SwitchStmtsShouldHaveDefault: Default is fine (Covered by Checkstyle too) -->
+         <!-- AvoidDeeplyNestedIfStmts: Exclude for now, might be noisy -->
+         <exclude name="AvoidDeeplyNestedIfStmts"/>
+         <!-- AvoidReassigningParameters: Default is fine -->
+         <!-- SwitchDensity: Default is fine -->
+         <!-- ConstructorCallsOverridableMethod: Default is fine -->
+         <!-- AccessorClassGeneration: Default is fine -->
+         <!-- FinalFieldCouldBeStatic: Default is fine -->
+         <!-- CloseResource: Default is fine -->
+         <!-- NonStaticInitializer: Default is fine -->
+         <!-- DefaultLabelNotLastInSwitchStmt: Default is fine -->
+         <!-- NonCaseLabelInSwitchStatement: Default is fine -->
+         <!-- AvoidConstantsInInterface: Default is fine -->
+         <!-- UnnecessaryLocalBeforeReturn: Default is fine -->
+         <!-- EmptyMethodInAbstractClassShouldBeAbstract: Default is fine -->
+         <!-- AbstractClassWithoutAbstractMethod: Default is fine -->
+         <!-- SimplifyConditional: Default is fine -->
+         <!-- CompareObjectsWithEquals: Default is fine -->
+         <!-- PositionLiteralsFirstInComparisons: Too opinionated, exclude -->
+         <exclude name="PositionLiteralsFirstInComparisons"/>
+         <!-- UnusedModifier: Default is fine -->
+         <!-- UseNotifyAllInsteadOfNotify: Default is fine -->
+         <!-- AvoidInstanceofChecksInCatchClause: Default is fine -->
+         <!-- AvoidSynchronizedAtMethodLevel: Default is fine -->
+         <!-- AvoidProtectedFieldInFinalClass: Default is fine -->
+         <!-- AssignmentToNonFinalStatic: Default is fine -->
+         <!-- MissingStaticMethodInNonInstantiatableClass: Default is fine -->
+         <!-- AvoidCallingFinalize: Default is fine -->
+         <!-- EqualsNull: Default is fine -->
+         <!-- ConfusingTernary: Default is fine -->
+         <!-- InstantiationToGetClass: Default is fine -->
+         <!-- IdempotentOperations: Default is fine -->
+         <!-- SingularField: Default is fine -->
+         <!-- UseLocaleWithCaseConversions: Default is fine -->
+         <!-- AvoidProtectedMethodInFinalClassNotExtending: Default is fine -->
+         <!-- ImmutableField: Default is fine -->
+         <!-- UseCollectionIsEmpty: Default is fine -->
+         <!-- ClassWithOnlyPrivateConstructorsShouldBeFinal: Default is fine -->
+         <!-- EmptyMethodInAbstractClassShouldBeAbstract: Default is fine -->
+         <!-- LogicInversion: Default is fine -->
+         <!-- AbstractClassWithoutAnyMethod: Default is fine -->
+         <!-- TooFewBranchesForASwitchStatement: Default is fine -->
+    </rule>
+
+    <!-- ================================================================= -->
+    <!-- Finalizer Rules                                                   -->
+    <!-- ================================================================= -->
+    <rule ref="rulesets/java/finalizers.xml"/>
+        <!-- EmptyFinalizer: Default is fine -->
+        <!-- FinalizeOnlyCallsSuperFinalize: Default is fine -->
+        <!-- FinalizeOverloaded: Default is fine -->
+        <!-- FinalizeDoesNotCallSuperFinalize: Default is fine -->
+        <!-- FinalizeShouldBeProtected: Default is fine -->
+        <!-- AvoidCallingFinalize: Already included in design.xml -->
+
+    <!-- ================================================================= -->
+    <!-- Import Statement Rules                                            -->
+    <!-- ================================================================= -->
+    <rule ref="rulesets/java/imports.xml">
+        <!-- DuplicateImports: Default is fine (Covered by Checkstyle too) -->
+        <!-- DontImportJavaLang: Default is fine -->
+        <!-- UnusedImports: Default is fine (Covered by Checkstyle too) -->
+        <!-- ImportFromSamePackage: Default is fine -->
+        <!-- TooManyStaticImports: Relaxed -->
+        <exclude name="TooManyStaticImports"/>
+        <!-- UnnecessaryFullyQualifiedName: Default is fine -->
+    </rule>
+    <rule ref="rulesets/java/imports.xml/TooManyStaticImports">
+        <properties>
+            <property name="maximumStaticImports" value="10"/> <!-- Default 4 -->
+        </properties>
+    </rule>
+
+    <!-- ================================================================= -->
+    <!-- Naming Conventions                                                -->
+    <!-- ================================================================= -->
+    <rule ref="rulesets/java/naming.xml">
+        <!-- AbstractNaming: Exclude, can be subjective -->
+        <exclude name="AbstractNaming"/>
+        <!-- AvoidDollarSigns: Default is fine -->
+        <!-- AvoidFieldNameMatchingTypeName: Default is fine -->
+        <!-- AvoidFieldNameMatchingMethodName: Default is fine -->
+        <!-- BooleanGetMethodName: Default is fine -->
+        <!-- ClassNamingConventions: Default is fine (Covered by Checkstyle too) -->
+        <!-- MethodNamingConventions: Default is fine (Covered by Checkstyle too) -->
+        <!-- PackageCase: Default is fine (Covered by Checkstyle too) -->
+        <!-- VariableNamingConventions: Default is fine (Covered by Checkstyle too) -->
+        <!-- MethodWithSameNameAsEnclosingClass: Default is fine -->
+        <!-- SuspiciousHashcodeMethodName: Default is fine -->
+        <!-- SuspiciousConstantFieldName: Default is fine -->
+        <!-- SuspiciousEqualsMethodName: Default is fine -->
+        <!-- MisleadingVariableName: Default is fine -->
+        <!-- ShortVariable: Relaxed -->
+        <exclude name="ShortVariable"/>
+        <!-- LongVariable: Relaxed -->
+        <exclude name="LongVariable"/>
+        <!-- ShortMethodName: Default is fine -->
+        <!-- ShortClassName: Default is fine -->
+        <!-- FormalParameterNamingConventions: Default is fine (Covered by Checkstyle too) -->
+        <!-- LocalVariableNamingConventions: Default is fine (Covered by Checkstyle too) -->
+        <!-- GenericsNaming: Default is fine (Covered by Checkstyle too) -->
+    </rule>
+     <rule ref="rulesets/java/naming.xml/ShortVariable">
+        <properties>
+            <property name="minimum" value="2"/> <!-- Default 3, allow 'i', 'e', etc. -->
+            <property name="reportLops" value="false"/> <!-- Don't report loop variables like i -->
+        </properties>
+     </rule>
+     <rule ref="rulesets/java/naming.xml/LongVariable">
+        <properties>
+            <property name="maximum" value="30"/> <!-- Default 17, allow longer descriptive names -->
+        </properties>
+     </rule>
+
+    <!-- ================================================================= -->
+    <!-- Optimization Rules (Consider carefully for Java 7)                -->
+    <!-- ================================================================= -->
+    <rule ref="rulesets/java/optimizations.xml">
+        <!-- LocalVariableCouldBeFinal: Might be too noisy, exclude -->
+        <exclude name="LocalVariableCouldBeFinal"/>
+        <!-- MethodArgumentCouldBeFinal: Might be too noisy, exclude -->
+        <exclude name="MethodArgumentCouldBeFinal"/>
+        <!-- AvoidInstantiatingObjectsInLoops: Default is fine -->
+        <!-- UseArrayListInsteadOfVector: Default is fine -->
+        <!-- SimplifyStartsWith: Default is fine -->
+        <!-- UseArraysAsList: Default is fine -->
+        <!-- AvoidArrayLoops: Default is fine -->
+        <!-- UnnecessaryWrapperObjectCreation: Default is fine -->
+        <!-- AddEmptyString: Default is fine -->
+        <!-- UseStringBufferForStringAppends: In Java 7, StringBuilder is generally preferred -->
+        <exclude name="UseStringBufferForStringAppends"/>
+        <!-- UseArraysSort: Default is fine -->
+        <!-- PrematureDeclaration: Default is fine -->
+        <!-- RedundantFieldInitializer: Default is fine -->
+    </rule>
+    <!-- Add StringBuilder check - Note: PMD 5.5.1 might not have this specific rule, -->
+    <!-- but strings.xml has rules for inefficient concatenations -->
+
+    <!-- ================================================================= -->
+    <!-- Security Rules                                                    -->
+    <!-- ================================================================= -->
+    <!-- Using android.xml covers some security aspects -->
+    <rule ref="rulesets/java/android.xml"/>
+        <!-- DoNotHardCodeSDCard: Default is fine -->
+
+    <!-- Additional general security rules (if applicable in PMD 5.5.1) -->
+    <!-- <rule ref="rulesets/java/security.xml"/> --> <!-- Check if this exists and is useful -->
+
+
+    <!-- ================================================================= -->
+    <!-- String and StringBuffer Rules                                     -->
+    <!-- ================================================================= -->
+    <rule ref="rulesets/java/strings.xml">
+        <!-- AvoidDuplicateLiterals: Can be noisy, exclude -->
+        <exclude name="AvoidDuplicateLiterals"/>
+        <!-- StringToString: Default is fine -->
+        <!-- StringInstantiation: Default is fine -->
+        <!-- StringToCharArray: Default is fine -->
+        <!-- InefficientStringBuffering: Default is fine -->
+        <!-- UnnecessaryCaseChange: Default is fine -->
+        <!-- UseStringBufferLength: Default is fine -->
+        <!-- AppendCharacterWithChar: Default is fine -->
+        <!-- ConsecutiveLiteralAppends: Default is fine -->
+        <!-- UseIndexOfChar: Default is fine -->
+        <!-- InefficientEmptyStringCheck: Default is fine -->
+        <!-- UselessStringValueOf: Default is fine -->
+        <!-- AvoidStringBufferField: Default is fine -->
+        <!-- UseEqualsToCompareStrings: Default is fine (Covered by Checkstyle too) -->
+        <!-- AvoidConcatenatingNonLiteralsInStringBuffer: Default is fine -->
+    </rule>
+    <rule ref="rulesets/java/strings.xml/ConsecutiveLiteralAppends">
+        <properties>
+            <property name="threshold" value="3"/> <!-- Default 1 -->
+        </properties>
+    </rule>
+
+
+    <!-- ================================================================= -->
+    <!-- Unused Code Rules                                                 -->
+    <!-- ================================================================= -->
+    <rule ref="rulesets/java/unusedcode.xml"/>
+        <!-- UnusedPrivateField: Default is fine -->
+        <!-- UnusedLocalVariable: Default is fine -->
+        <!-- UnusedPrivateMethod: Default is fine -->
+        <!-- UnusedFormalParameter: Default is fine -->
+
+</ruleset>
