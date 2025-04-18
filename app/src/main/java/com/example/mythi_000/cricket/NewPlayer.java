@@ -23,6 +23,13 @@ public String No;
 public String Name;
 public EditText t1;
 public EditText t2;
+    private HttpRequest httpRequest; // Added field
+
+    // Added setter
+    public void setHttpRequest(HttpRequest httpRequest) {
+        this.httpRequest = httpRequest;
+    }
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -31,6 +38,11 @@ public EditText t2;
             t2 = (EditText) findViewById(R.id.editText1);
             Button submitbtn = (Button) findViewById(R.id.button);
             Log.i(myTag, "OnCreate()");
+
+            // Initialize if not injected
+            if (this.httpRequest == null) {
+                this.httpRequest = new HttpRequest();
+            }
 
             submitbtn.setOnClickListener(new View.OnClickListener() {
 
@@ -59,10 +71,13 @@ public EditText t2;
         }
 
         public void postData() {
-
-            HttpRequest mReq = new HttpRequest();
+            // HttpRequest mReq = new HttpRequest(); // Removed line
+            HttpRequest mReq = this.httpRequest; // Use field
             String fileurl = "https://docs.google.com/forms/d/1cWQJsmGw-5MMvSEDxGxuQ939Xv94GM4oILazJg6J8JM/formResponse";
-            String data = "entry.1581232643=" + URLEncoder.encode(No) + "&" + "entry.1181358226=" + URLEncoder.encode(Name);
+            // Need to ensure No and Name are set before calling postData in tests
+            // Added null checks
+            String data = "entry.1581232643=" + URLEncoder.encode(No != null ? No : "") + "&" +
+                          "entry.1181358226=" + URLEncoder.encode(Name != null ? Name : "");
             String response = mReq.sendPost(fileurl, data);
             Log.i(myTag, "postData()");
 
