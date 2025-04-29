@@ -34,15 +34,15 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.10.19' // Added Mockito
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.android.support:design:23.1.0'
-    compile files('library/httpclient-4.0.jar')
-    compile files('library/httpcore-4.0.1.jar')
-    compile files('library/gdata-spreadsheet-3.0.jar')
-    compile files('library/gdata-core-1.0.jar')
+    implementation fileTree(dir: 'libs', include: ['*.jar']) // Changed to implementation
+    testImplementation 'junit:junit:4.12' // Changed to testImplementation
+    testImplementation 'org.mockito:mockito-core:1.10.19' // Changed to testImplementation
+    implementation 'androidx.appcompat:appcompat:1.0.0' // Replaced and updated
+    implementation 'com.google.android.material:material:1.0.0' // Replaced and updated
+    implementation files('library/httpclient-4.0.jar') // Changed to implementation
+    implementation files('library/httpcore-4.0.1.jar') // Changed to implementation
+    implementation files('library/gdata-spreadsheet-3.0.jar') // Changed to implementation
+    implementation files('library/gdata-core-1.0.jar') // Changed to implementation
 }
 
 checkstyle {

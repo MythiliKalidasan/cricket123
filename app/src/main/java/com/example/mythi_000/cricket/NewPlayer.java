@@ -1,7 +1,7 @@
 package com.example.mythi_000.cricket;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity; // Replaced import
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;

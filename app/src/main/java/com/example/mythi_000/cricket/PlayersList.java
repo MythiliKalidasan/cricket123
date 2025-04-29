@@ -7,7 +7,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity; // Replaced import
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
